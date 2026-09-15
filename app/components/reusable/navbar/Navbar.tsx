@@ -1,13 +1,34 @@
-import Image from 'next/image'
-import React from 'react'
+import Container from '@/app/components/reusable/Container';
+import NavbarLogo from './NavbarLogo';
+import NavbarContact from './NavbarContact';
+import { BrandInfo, ContactInfo } from '@/types/site';
 
-export default function Navbar() {
-  return (
-    <div className="bg-background px-[200px] py-12" >
-      <Image src="/image/logo.png" alt="Logo" height={90} width={64} className="object-contain w-fit h-full" />
-      <h3>
-
-      </h3>
-    </div>
-  )
+export interface NavbarProps {
+  brand?: BrandInfo;
+  contact?: ContactInfo;
+  className?: string;
 }
+
+export default function Navbar({
+  brand,
+  contact,
+  className = '',
+}: NavbarProps) {
+  return (
+    <header
+      className={`w-full bg-background border-b border-border ${className}`.trim()}
+    >
+      <Container>
+        <nav
+          className="flex items-center justify-between py-4 sm:py-5"
+          aria-label="Main Navigation"
+        >
+          <NavbarLogo brand={brand} />
+          <NavbarContact contact={contact} />
+        </nav>
+      </Container>
+    </header>
+  );
+}
+
+export { NavbarLogo, NavbarContact };

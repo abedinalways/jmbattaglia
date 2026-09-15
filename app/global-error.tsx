@@ -1,18 +1,21 @@
-'use client'; 
+'use client';
 
 export default function GlobalError({
-  error,
-  retry,
+  reset,
 }: {
   error: Error & { digest?: string };
-  retry: () => void;
+  reset: () => void;
 }) {
   return (
-    // global-error must include html and body tags
-    <html>
-      <body>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => retry()}>Try again</button>
+    <html lang="en">
+      <body className="flex min-h-screen flex-col items-center justify-center p-4">
+        <h2 className="text-xl font-semibold mb-4">Something went wrong!</h2>
+        <button
+          onClick={() => reset()}
+          className="px-4 py-2 bg-primary text-primary-foreground rounded-md font-medium"
+        >
+          Try again
+        </button>
       </body>
     </html>
   );
